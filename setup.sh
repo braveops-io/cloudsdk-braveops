@@ -4,6 +4,9 @@
 # Usage: setup.sh [CLIENT] [PROEJCT] [CLUSTER]
 USAGE="Usage: setup.sh [CLIENT] [PROEJCT] [CLUSTER]"
 
+# docker tag of the braveops/cloud-sdk
+TAG=v2
+
 CLIENT=$1
 PROJECT=$2
 CLUSTER=$3
@@ -31,8 +34,8 @@ KUBEDIR="${HOME}/.config/kube-${CLIENT}"
 mkdir -p ${GCLOUDDIR}
 mkdir -p ${KUBEDIR}
 
-RUNCMD="docker run --rm -v ${KUBEDIR}:/root/.kube -v ${GCLOUDDIR}:/root/.config --name ${CLIENT}-gcloud  braveops/cloud-sdk:v1"
-RUNCMD_INTERACTIVE="docker run --rm -v ${KUBEDIR}:/root/.kube -v ${GCLOUDDIR}:/root/.config --name ${CLIENT}-gcloud -it braveops/cloud-sdk:v1"
+RUNCMD="docker run --rm -v ${KUBEDIR}:/root/.kube -v ${GCLOUDDIR}:/root/.config --name ${CLIENT}-gcloud  braveops/cloud-sdk:${TAG}"
+RUNCMD_INTERACTIVE="docker run --rm -v ${KUBEDIR}:/root/.kube -v ${GCLOUDDIR}:/root/.config --name ${CLIENT}-gcloud -it braveops/cloud-sdk:${TAG}"
 
 
 # Log in to gcloud if it hasnt been done already
