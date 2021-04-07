@@ -34,8 +34,11 @@ KUBEDIR="${HOME}/.config/kube-${CLIENT}"
 mkdir -p ${GCLOUDDIR}
 mkdir -p ${KUBEDIR}
 
+# Create a scratch folder for copying files in/out to the container.
+mkdir -p ${PWD}/temp
+
 RUNCMD="docker run --rm -v ${KUBEDIR}:/root/.kube -v ${GCLOUDDIR}:/root/.config --name ${CLIENT}-gcloud  braveops/cloud-sdk:${TAG}"
-RUNCMD_INTERACTIVE="docker run --rm -v ${KUBEDIR}:/root/.kube -v ${GCLOUDDIR}:/root/.config --name ${CLIENT}-gcloud -it braveops/cloud-sdk:${TAG}"
+RUNCMD_INTERACTIVE="docker run --rm -v ${PWD}/temp:/hosttemp -v ${KUBEDIR}:/root/.kube -v ${GCLOUDDIR}:/root/.config --name ${CLIENT}-gcloud -it braveops/cloud-sdk:${TAG}"
 
 
 # Log in to gcloud if it hasnt been done already
